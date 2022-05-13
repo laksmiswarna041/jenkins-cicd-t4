@@ -8,7 +8,7 @@ phases:
       - aws --version
       - set -x
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 590852515231.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=590852515231.dkr.ecr.us-east-1.amazonaws.com/sriram-cicd-task4
+      - REPOSITORY_URI=590852515231.dkr.ecr.us-east-1.amazonaws.com/sgb-cicd-t4
       - docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
@@ -25,7 +25,7 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"sriram-phpapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"swarna-phpapp","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json 
 artifacts:
     files: imagedefinitions.json
